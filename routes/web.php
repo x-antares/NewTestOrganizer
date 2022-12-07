@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::model('user', User::class);
+Route::get('/user/{user}/', [UserController::class, 'edit'])->name('edit.user');
+Route::post('/user/{user}/update/', [UserController::class, 'update'])->name('update.user');
+Route::get('/user/{user}/password/change/', [UserController::class, 'changePassword'])->name('password.change');
+Route::post('/user/{user}/password/update/', [UserController::class, 'changePasswordSave'])->name('password.confirm');
