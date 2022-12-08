@@ -83,9 +83,11 @@
         @foreach ($errors->all() as $error)
             <div class="alert alert-danger">{{ $error }}</div>
         @endforeach
-        <main class="py-4">
-            @yield('content')
-        </main>
+            <div id="app">
+                <main class="py-4">
+                    @yield('content')
+                </main>
+            </div>
     </div>
 </body>
 </html>
