@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -29,7 +28,7 @@ class EventStartMail extends Mailable
      */
     public function build()
     {
-        return $this->from('koshceyshka@gmail.com')
+        return $this->from(env('MAIL_FROM_ADDRESS'))
             ->view('mails.event')
             ->with([
                 'title' => 'Розпочинається подія'

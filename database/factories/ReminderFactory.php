@@ -18,9 +18,10 @@ class ReminderFactory extends Factory
     public function definition()
     {
         $dateInterval = $this->generateFakeTime($this->faker, 'reminder');
+        $user = User::select('id')->inRandomOrder()->first();
 
         return [
-            'user_id' => User::select('id')->inRandomOrder()->first(),
+            'user_id' => $user->id,
             'reminder_name' => $this->faker->word(5),
             'color' => $this->faker->hexColor(),
             'date' => $dateInterval['date'],

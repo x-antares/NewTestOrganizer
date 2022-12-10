@@ -11,6 +11,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ReminderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         return ReminderResource::collection(Reminder::all());
@@ -42,9 +47,16 @@ class ReminderController extends Controller
 
         return response()->json([
             'data' => new ReminderResource($reminder),
-            'message' => 'Event updated successfully!!',
+            'message' => 'Reminder updated successfully!!',
             'status' => Response::HTTP_ACCEPTED
         ]);
+    }
+
+    public function destroy(Reminder $reminder)
+    {
+        $reminder->delete();
+
+        return response('Reminder deleted!!', Response::HTTP_NO_CONTENT);
     }
 
     public function sendEmails($reminder)
